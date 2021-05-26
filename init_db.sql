@@ -12,7 +12,6 @@ primary key (idTheme));
 CREATE TABLE Module
 (idModule int not null AUTO_INCREMENT,
 libelleModule varchar(50) not null,
-nbQuestion int not null,
 scoreTotal int,
 primary key (idModule),
 idTheme int not null,
