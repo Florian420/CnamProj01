@@ -19,7 +19,7 @@
 ?>
 
 <div id="blog">
-
+<h1 class="center" style="font-size: 35px;">MENTIONS LEGALES</h1>
 <p>
 Les informations recueillies sur ce formulaire sont enregistrées dans un fichier informatisé par L'Equipe ProjetQuizz2 pour la soutenance du projet. 
 
