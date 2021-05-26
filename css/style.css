@@ -94,6 +94,17 @@ header
 	margin-bottom: 150px;
 }
 
+#retour
+{
+	color: rgb(58,58,58);
+	width: 55%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	padding: 1%;
+	margin-bottom: 20px;
+}
+
 p
 {
 	width: 100%;
