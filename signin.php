@@ -92,7 +92,7 @@
                 $_SESSION["loggedin"] = true;
                 $_SESSION["login"] = $user->login();
                 $_SESSION["id"] = $user->id();
-                $_SESSION["rank"] = $user->rank();
+                $_SESSION["admin"] = $user->admin();
                 $auth_msg = "<p style='text-align: center;'>Vous êtes maintenant connecté !</p>";
                 header("Refresh:2;url=index.php", true, 200);
             }
