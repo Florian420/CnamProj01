@@ -6,7 +6,7 @@
     <title>quiz.io | A propos</title>
     <meta name="Description" content="Test tes connaissances !"/>
     <meta name="Title" content="quiz.io"/>
-    <meta name="Author" content="YBE"/>
+    <meta name="Author" content="_"/>
 
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="icon" href="quiz.png"/>
@@ -28,7 +28,7 @@
     <h1 class="center" style="font-size: 55px;">A Propos</h1>
 
     <p>
-        It's a me, quiz.io@IRUP.YBE !
+        It's a me, quizIT.io@CNAM !
     </p>
 
     <br/>
@@ -38,10 +38,10 @@
     <br/>
 
     <ul>
-        <li>Email: Pr3acher at protonmail.ch</li>
-        <li>Twitter: <a href="https://twitter.com/_pr3_">_pr3_</a></li>
-        <li>GitHub: <a href="https://github.com/Pr3ach">Pr3ach</a></li>
-        <li>GitLab: <a href="https://gitlab.com/Preacher">Preacher</a></li>
+        <li>Email: x at protonmail.ch</li>
+        <li>Twitter: <a href="https://twitter.com/x">_</a></li>
+        <li>GitHub: <a href="https://github.com/x">x</a></li>
+        <li>GitLab: <a href="https://gitlab.com/x">x</a></li>
     </ul>
 </div>
 
