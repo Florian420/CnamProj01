@@ -37,28 +37,24 @@
      * Profil Info
      *
      */
-    $userinfo = $DB->prepare("SELECT * FROM user WHERE user_id = :id AND user_login = :login");
+    $userinfo = $DB->prepare("SELECT * FROM Utilisateur WHERE idUtilisateur = :id AND login = :login");
     $userinfo->bindValue(":id", $_SESSION["id"]);
     $userinfo->bindValue(":login", $_SESSION["login"]);
     $userinfo->execute();
     $r = $userinfo->fetch();
 
-    $firstname = $r['user_firstname'];
-    $name = $r['user_name'];
-    $rank = $r['user_rank'];
+    $firstname = $r['prenom'];
+    $name = $r['nom'];
+    $admin = $r['admin'];
 
-    switch ($rank)
+    switch ($admin)
     {
-    case RANK_MEMBER:
-        $rank = "Membre";
-    case RANK_MODERATOR:
-        $rank = "Modérateur";
-    case RANK_ADMIN:
-        $rank = "Administrateur";
-    case RANK_WEBMASTER:
-        $rank = "WebMaster";
+    case 0:
+        $admin = "Utilisateur";
+    case 1:
+        $admin = "Admin";
     default:
-        $rank = "Inconnu";
+        $admin = "Inconnu";
     }
 
     echo '<h3 style="text-align: center;">Information de Profile</h3>';
