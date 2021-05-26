@@ -1,120 +1,84 @@
-USE quiz;
+USE quizzit;
 
-/* Modules */
-INSERT INTO module(mod_level, mod_title, mod_name, mod_desc) VALUES (7, "Retro-Ingénierie (RCE)",  "mod_itsec", "Module de cybersécurité axé sur la rétro-ingénierie de code (RCE)");
-INSERT INTO module(mod_level, mod_title, mod_name, mod_desc) VALUES (5, "Mécanique Automobile", "mod_mecanics", "Testez vos connaissances sur la mécanique auto !");
+/*Insert Utilisateur*/
+insert into Utilisateur (nom, prenom, login, mdp, admin) values ('nomAdmin', 'prenomAdmin', 'admin', 'password', TRUE);
 
-/* Questions RCE */
-INSERT INTO question(mod_id, q_text) VALUES (1, "Que siginifie le terme PEB ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Quel est le nom du registre qui pointe sur la pile sur processeur x86 ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Que contient le segment .text ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Quel est le role du registre EIP ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Quelle est la version 'safe' de la fonction C strcpy ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Quelle interuption correspond à l'éxécution d'un appel système en asm x86 ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Laquelle de ces opcode ne fait rien ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Dans lequel de ces segments sont stockés les variables allouées dynamiquement (malloc/calloc) ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Par quelles lettres de l'entête peut-on reconnaitre un fichier PE ?");
-INSERT INTO question(mod_id, q_text) VALUES (1, "Quel est le nom du format de fichier éxécutable sous GNU/Linux ?");
+/*Insert Theme*/
+insert into Theme (libelleTheme) values ('Mathématiques');
+insert into Theme (libelleTheme) values ('Français');
 
-/* Suggestions IT sec */
-INSERT INTO suggestion(q_id, sug_text) VALUES (1, "Primary Environment Batch");
-INSERT INTO suggestion(q_id, sug_text) VALUES (1, "Process Environment Block");
-INSERT INTO suggestion(q_id, sug_text) VALUES (1, "Post Execution Block");
-INSERT INTO suggestion(q_id, sug_text) VALUES (1, "PE Execution Block");
+/*Insert Module*/
+insert into Module (libelleModule, idTheme) values ('addition', 1);
+insert into Module (libelleModule, idTheme) values ('soustraction', 1);
+insert into Module (libelleModule, idTheme) values ('multiplication', 1);
+insert into module (libelleModule, idTheme) values ('conjugaison', 2);
+insert into module (libelleModule, idTheme) values ('orthographe', 2);
+insert into module (libelleModule, idTheme) values ('grammaire', 2);
 
-INSERT INTO suggestion(q_id, sug_text) VALUES (2, "EIP");
-INSERT INTO suggestion(q_id, sug_text) VALUES (2, "ESP");
-INSERT INTO suggestion(q_id, sug_text) VALUES (2, "EAX");
-INSERT INTO suggestion(q_id, sug_text) VALUES (2, "EBX");
+/*Insert Question*/
+insert into question (libelleQuestion , idModule) values ('2 + 3', 1);
+insert into question (libelleQuestion , idModule) values ('22 + 33', 1);
+insert into question (libelleQuestion , idModule) values ('33 + 63', 1);
+insert into question (libelleQuestion , idModule) values ('24 + 39', 1);
+insert into question (libelleQuestion , idModule) values ('72 + 43', 1);
+insert into question (libelleQuestion , idModule) values ('26 + 34', 1);
+insert into question (libelleQuestion , idModule) values ('28 + 66', 1);
+insert into question (libelleQuestion , idModule) values ('11 + 55', 1);
+insert into question (libelleQuestion , idModule) values ('55 + 66', 1);
+insert into question (libelleQuestion , idModule) values ('33 + 44', 1);
+insert into question (libelleQuestion , idModule) values ('88 + 566', 1);
+insert into question (libelleQuestion , idModule) values ('1 + 99', 1);
+insert into question (libelleQuestion , idModule) values ('34 + 83', 1);
+insert into question (libelleQuestion , idModule) values ('21 + 44', 1);
+insert into question (libelleQuestion , idModule) values ('44 + 23', 1);
+insert into question (libelleQuestion , idModule) values ('29 + 35', 1);
+insert into question (libelleQuestion , idModule) values ('100 + 34', 1);
+insert into question (libelleQuestion , idModule) values ('99 + 55', 1);
+insert into question (libelleQuestion , idModule) values ('44 + 99', 1);
+insert into question (libelleQuestion , idModule) values ('55 + 32', 1);
+insert into question (libelleQuestion , idModule) values ('3  - 3', 2);
+insert into question (libelleQuestion , idModule) values ('23 - 12', 2);
+insert into question (libelleQuestion , idModule) values ('34 - 31', 2);
+insert into question (libelleQuestion , idModule) values ('43 - 3', 2);
+insert into question (libelleQuestion , idModule) values ('55 - 12', 2);
+insert into question (libelleQuestion , idModule) values ('88 - 55', 2);
+insert into question (libelleQuestion , idModule) values ('55 - 78', 2);
+insert into question (libelleQuestion , idModule) values ('99 - 44', 2);
+insert into question (libelleQuestion , idModule) values ('888 - 56', 2);
+insert into question (libelleQuestion , idModule) values ('44 - 9', 2);
+insert into question (libelleQuestion , idModule) values ('98 - 8', 2);
+insert into question (libelleQuestion , idModule) values ('222 - 111', 2);
+insert into question (libelleQuestion , idModule) values ('43 - 3', 2);
+insert into question (libelleQuestion , idModule) values ('99 - 55', 2);
+insert into question (libelleQuestion , idModule) values ('55 - 11', 2);
+insert into question (libelleQuestion , idModule) values ('23 - 3', 2);
+insert into question (libelleQuestion , idModule) values ('89 - 77', 2);
+insert into question (libelleQuestion , idModule) values ('45 - 22', 2);
+insert into question (libelleQuestion , idModule) values ('65 - 21', 2);
+insert into question (libelleQuestion , idModule) values ('34 - 34', 2);
+insert into question (libelleQuestion , idModule) values ('3 x 3', 3);
+insert into question (libelleQuestion , idModule) values ('4 x 2', 3);
+insert into question (libelleQuestion , idModule) values ('5 x 5', 3);
+insert into question (libelleQuestion , idModule) values ('4 x 2', 3);
+insert into question (libelleQuestion , idModule) values ('4 x 1', 3);
+insert into question (libelleQuestion , idModule) values ('9 x 3', 3);
+insert into question (libelleQuestion , idModule) values ('3 x 4', 3);
+insert into question (libelleQuestion , idModule) values ('3 x 2', 3);
+insert into question (libelleQuestion , idModule) values ('1 x 3', 3);
+insert into question (libelleQuestion , idModule) values ('5 x 4', 3);
+insert into question (libelleQuestion , idModule) values ('6 x 5', 3);
+insert into question (libelleQuestion , idModule) values ('7 x 6', 3);
+insert into question (libelleQuestion , idModule) values ('8 x 3', 3);
+insert into question (libelleQuestion , idModule) values ('9 x 3', 3);
+insert into question (libelleQuestion , idModule) values ('1 x 2', 3);
+insert into question (libelleQuestion , idModule) values ('2 x 3', 3);
+insert into question (libelleQuestion , idModule) values ('4 x 4', 3);
+insert into question (libelleQuestion , idModule) values ('5 x 5', 3);
+insert into question (libelleQuestion , idModule) values ('6 x 6', 3);
+insert into question (libelleQuestion , idModule) values ('7 x 1', 3);
+insert into question (libelleQuestion , idModule) values ('8 x 8', 3);
 
-INSERT INTO suggestion(q_id, sug_text) VALUES (3, "Le code de l'application");
-INSERT INTO suggestion(q_id, sug_text) VALUES (3, "Les données de l'application");
-INSERT INTO suggestion(q_id, sug_text) VALUES (3, "Les ressources de l'application");
-INSERT INTO suggestion(q_id, sug_text) VALUES (3, "L'entête de l'application");
 
-INSERT INTO suggestion(q_id, sug_text) VALUES (4, "Il pointe sur la base de la pile d'éxécution");
-INSERT INTO suggestion(q_id, sug_text) VALUES (4, "C'est un registre qui permet de manipuler les chaines de caracètres");
-INSERT INTO suggestion(q_id, sug_text) VALUES (4, "Il pointe sur la prochaine instruction à éxécuter");
-INSERT INTO suggestion(q_id, sug_text) VALUES (4, "Il est réservé au système");
 
-INSERT INTO suggestion(q_id, sug_text) VALUES (5, "strcpyn");
-INSERT INTO suggestion(q_id, sug_text) VALUES (5, "nstrcpy");
-INSERT INTO suggestion(q_id, sug_text) VALUES (5, "strncpy");
-INSERT INTO suggestion(q_id, sug_text) VALUES (5, "n_strcpy");
 
-INSERT INTO suggestion(q_id, sug_text) VALUES (6, "int 0x70");
-INSERT INTO suggestion(q_id, sug_text) VALUES (6, "int 0x80");
-INSERT INTO suggestion(q_id, sug_text) VALUES (6, "int 0x40");
-INSERT INTO suggestion(q_id, sug_text) VALUES (6, "int 3");
 
-INSERT INTO suggestion(q_id, sug_text) VALUES (7, "nop");
-INSERT INTO suggestion(q_id, sug_text) VALUES (7, "lea");
-INSERT INTO suggestion(q_id, sug_text) VALUES (7, "shl");
-INSERT INTO suggestion(q_id, sug_text) VALUES (7, "jnz");
-
-INSERT INTO suggestion(q_id, sug_text) VALUES (8, "bss");
-INSERT INTO suggestion(q_id, sug_text) VALUES (8, "data");
-INSERT INTO suggestion(q_id, sug_text) VALUES (8, "rsrc");
-INSERT INTO suggestion(q_id, sug_text) VALUES (8, "heap");
-
-INSERT INTO suggestion(q_id, sug_text) VALUES (9, "PE");
-INSERT INTO suggestion(q_id, sug_text) VALUES (9, "MZ");
-INSERT INTO suggestion(q_id, sug_text) VALUES (9, "MS");
-INSERT INTO suggestion(q_id, sug_text) VALUES (9, "EP");
-
-INSERT INTO suggestion(q_id, sug_text) VALUES (10, "mach-o");
-INSERT INTO suggestion(q_id, sug_text) VALUES (10, "exe");
-INSERT INTO suggestion(q_id, sug_text) VALUES (10, "nix");
-INSERT INTO suggestion(q_id, sug_text) VALUES (10, "elf");
-
-/* Answers IT sec */
-INSERT INTO answer(q_id, sug_id) VALUES(1, 2);
-INSERT INTO answer(q_id, sug_id) VALUES(2, 6);
-INSERT INTO answer(q_id, sug_id) VALUES(3, 9);
-INSERT INTO answer(q_id, sug_id) VALUES(4, 15);
-INSERT INTO answer(q_id, sug_id) VALUES(5, 19);
-INSERT INTO answer(q_id, sug_id) VALUES(6, 22);
-INSERT INTO answer(q_id, sug_id) VALUES(7, 25);
-INSERT INTO answer(q_id, sug_id) VALUES(8, 32);
-INSERT INTO answer(q_id, sug_id) VALUES(9, 34);
-INSERT INTO answer(q_id, sug_id) VALUES(10, 40);
-
-/* Question mecanics */
-INSERT INTO question(mod_id, q_text) VALUES (2, "Que signifie le terme ECU ?");
-INSERT INTO question(mod_id, q_text) VALUES (2, "Dans quel mode se trouve un moteur au démarrage ?");
-INSERT INTO question(mod_id, q_text) VALUES (2, "Qu'est-ce que l'AFR ?");
-INSERT INTO question(mod_id, q_text) VALUES (2, "Quelle sonde lambda permet de meilleurs AFR et performances moteur ?");
-INSERT INTO question(mod_id, q_text) VALUES (2, "Quel est le mélange stoechiométrique de l'essence ?");
-
-/* Suggestion mecanics */
-INSERT INTO suggestion(q_id, sug_text) VALUES (11, "Electronic Control Unit");
-INSERT INTO suggestion(q_id, sug_text) VALUES (11, "Engine Control Unit");
-INSERT INTO suggestion(q_id, sug_text) VALUES (11, "Electronic Catalyst Unit");
-INSERT INTO suggestion(q_id, sug_text) VALUES (11, "Efficient Catback Unit");
-
-INSERT INTO suggestion(q_id, sug_text) VALUES (12, "Closed Loop");
-INSERT INTO suggestion(q_id, sug_text) VALUES (12, "Opened Loop");
-INSERT INTO suggestion(q_id, sug_text) VALUES (12, "Middle Loop");
-INSERT INTO suggestion(q_id, sug_text) VALUES (12, "State Loop");
-
-INSERT INTO suggestion(q_id, sug_text) VALUES (13, "Le ratio Air/Essence");
-INSERT INTO suggestion(q_id, sug_text) VALUES (13, "Le ration Air/Huile");
-INSERT INTO suggestion(q_id, sug_text) VALUES (13, "Le ration Essence/Air");
-INSERT INTO suggestion(q_id, sug_text) VALUES (13, "Le ration Huile/Essence");
-
-INSERT INTO suggestion(q_id, sug_text) VALUES (14, "La sonde Bande Etroite");
-INSERT INTO suggestion(q_id, sug_text) VALUES (14, "La sonde Bande Mince");
-INSERT INTO suggestion(q_id, sug_text) VALUES (14, "La sonde Bande Longue");
-INSERT INTO suggestion(q_id, sug_text) VALUES (14, "La sonde Bande Large");
-
-INSERT INTO suggestion(q_id, sug_text) VALUES (15, "14.2");
-INSERT INTO suggestion(q_id, sug_text) VALUES (15, "9.7");
-INSERT INTO suggestion(q_id, sug_text) VALUES (15, "14.7");
-INSERT INTO suggestion(q_id, sug_text) VALUES (15, "15.2");
-
-/* Answers mecanics */
-INSERT INTO answer(q_id, sug_id) VALUES(11, 42);
-INSERT INTO answer(q_id, sug_id) VALUES(12, 45);
-INSERT INTO answer(q_id, sug_id) VALUES(13, 49);
-INSERT INTO answer(q_id, sug_id) VALUES(14, 56);
-INSERT INTO answer(q_id, sug_id) VALUES(15, 59);
