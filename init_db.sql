@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS QuizzIT;
-CHARACTER SET = 'utf8'
+CHARACTER SET = 'utf8';
 COLLATE = 'utf8_general_ci';
+USE QuizzIT;
 
 CREATE TABLE Theme
 (idTheme int  not null  AUTO_INCREMENT,
