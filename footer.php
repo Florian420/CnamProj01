@@ -5,6 +5,7 @@
         <a href="https://github.com/Pr3ach" class="social"><i class="fa fa-github fa-2x"></i></a>
     </div>
 
-    <p class="center">quiz.io - 2020</p>
+    <p class="center">QuizzIT</p>
     <p class="center"><a href="/about.php">About</a></p>
+    <p class="center"><a href="/mentionsLegales.php">Mentions Legales</a></p>
 </footer>
