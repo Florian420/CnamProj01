@@ -30,7 +30,7 @@ CREATE TABLE Utilisateur
 nom varchar(50) not null,
 prenom varchar(50) not null,
 login varchar(50) not null,
-mdp varchar(50) not null,
+mdp varchar(512) not null,
 admin boolean,
 primary key (idUtilisateur));
 
