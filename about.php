@@ -27,13 +27,8 @@
 
     <h1 class="center" style="font-size: 55px;">A Propos</h1>
 
-    <p>
-        It's a me, quiz.io@IRUP.YBE !
-    </p>
 
-    <br/>
-
-    <em>Contact and details</em>
+    <em>Contacte et détails</em>
     <br/>
     <br/>
 
@@ -43,6 +38,10 @@
         <li>GitHub: <a href="https://github.com/Pr3ach">Pr3ach</a></li>
         <li>GitLab: <a href="https://gitlab.com/Preacher">Preacher</a></li>
     </ul>
+</div>
+    
+<div id="retour">
+<a href="mentionsLegales.php">Mentions légales</a>
 </div>
 
 <?php
