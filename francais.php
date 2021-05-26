@@ -46,6 +46,14 @@
 			value="Grammaire">
 	</a>
 </div>
+<div id="retour">
+	<a href="theme.php">
+	<input 	class="center_block"
+			style="font-size: 20px;"
+			type="button"
+			value="Retour">
+	</a>
+</div>
 <?php
     include("footer.php");
 ?>
