@@ -84,7 +84,7 @@ class UserManager
     {
         $login = (string)$login;
 
-        $q = $this->_db->prepare("SELECT idUtilisateur, nom, prenom, login, mdp, admin FROM Utilisateur WHERE login = :login");
+        $q = $this->_db->prepare("SELECT idUtilisateur AS user_id, nom AS user_name, prenom AS user_firstname, login AS user_login, mdp AS user_passwd, admin AS user_admin FROM Utilisateur WHERE login = :login");
         $q->bindValue(":login", $login);
         $q->execute();
         $data = $q->fetch(PDO::FETCH_ASSOC);
