@@ -40,9 +40,6 @@
     </ul>
 </div>
     
-<div id="retour">
-<a href="mentionsLegales.php">Mentions légales</a>
-</div>
 
 <?php
     include("footer.php");
