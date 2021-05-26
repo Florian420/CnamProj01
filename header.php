@@ -7,7 +7,7 @@ session_start();
 
 if (isset($_SESSION['login']) && $_SESSION['loggedin'] == true)
 {
-    if (isset($_SESSION['rank']) && $_SESSION['rank'] >= 10) // Admin
+    if (isset($_SESSION['admin']) && $_SESSION['admin'] == true) // Admin
             echo '<a href="/adminpanel.php">BACKEND</a>';
     else // Regular user
             echo '<a href="/userpanel.php">MON COMPTE</a>';
