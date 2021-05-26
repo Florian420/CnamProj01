@@ -73,7 +73,7 @@
 
     echo '<tr>';
     echo '<td>Droits</td>';
-    echo '<td>' . $rank . '</td>';
+    echo '<td>' . $admin . '</td>';
     echo '<tr/>';
 
     echo '</tbody>';
