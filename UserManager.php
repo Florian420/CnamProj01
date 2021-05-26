@@ -22,7 +22,7 @@ class UserManager
      */
     public function exists(User $user) : bool
     {
-        $q = $this->_db->prepare("SELECT * FROM user WHERE user_login = :login");
+        $q = $this->_db->prepare("SELECT * FROM Utilisateur WHERE login = :login");
         $q->bindValue(":login", $user->login());
         $q->execute();
 
@@ -35,7 +35,7 @@ class UserManager
      */
     public function auth(User $user) : bool
     {
-        $res = $this->_db->prepare("SELECT user_passwd FROM user WHERE user_login = :login");
+        $res = $this->_db->prepare("SELECT mdp FROM Utilisateur WHERE login = :login");
         $res->bindValue(":login", $user->login());
         $res->execute();
 
@@ -44,7 +44,7 @@ class UserManager
 
         $dbuser = $res->fetch(PDO::FETCH_ASSOC);
 
-        return password_verify($user->passwd(), $dbuser["user_passwd"]);
+        return password_verify($user->passwd(), $dbuser["mdp"]);
     }
 
     /****************
@@ -58,15 +58,22 @@ class UserManager
         if ($this->exists($user))
             return false;
 
-        $q = $this->_db->prepare("INSERT INTO user(user_firstname, user_name, user_login, user_passwd, user_rank) VALUES (:firstname, :name, :login, :passwd, :rank)");
+        $q = $this->_db->prepare("INSERT INTO Utilisateur(nom, prenom, login, mdp, admin) VALUES(:name, :firstname, :login, :passwd, :admin)");
 
-        $q->bindValue(":firstname", $user->firstname());
         $q->bindValue(":name", $user->name());
+        $q->bindValue(":firstname", $user->firstname());
         $q->bindValue(":login", $user->login());
         $q->bindValue(":passwd", password_hash($user->passwd(), PASSWORD_DEFAULT));
-        $q->bindValue(":rank", $user->rank());
+        $q->bindValue(":admin", $user->admin());
 
-        return $q->execute();
+        try {
+            if ($q->execute())
+                return true;
+        } catch (Exception $e)
+        {
+        }
+
+        return false;
     }
 
     /*
@@ -77,7 +84,7 @@ class UserManager
     {
         $login = (string)$login;
 
-        $q = $this->_db->prepare("SELECT user_id, user_firstname, user_name, user_login, user_passwd, user_rank FROM user WHERE user_login = :login");
+        $q = $this->_db->prepare("SELECT idUtilisateur, nom, prenom, login, mdp, admin FROM Utilisateur WHERE login = :login");
         $q->bindValue(":login", $login);
         $q->execute();
         $data = $q->fetch(PDO::FETCH_ASSOC);
@@ -91,13 +98,13 @@ class UserManager
      */
     public function update(User $old, User $new) : bool
     {
-        $q = $this->_db->prepare("UPDATE user SET user_firstname = :firstname, user_name = :name, user_login = :login, user_passwd = :passwd, user_rank = :rank WHERE user_id = :id");
+        $q = $this->_db->prepare("UPDATE Utilisateur SET prenom = :firstname, nom = :name, login = :login, mdp = :passwd, admin = :admin WHERE idUtilisateur = :id");
 
         $q->bindValue(":firstname", $new->firstname());
         $q->bindValue(":name", $new->name());
         $q->bindValue(":login", $new->login());
         $q->bindValue(":passwd", password_hash($new->passwd(), PASSWORD_DEFAULT));
-        $q->bindValue(":rank", $new->rank());
+        $q->bindValue(":admin", $new->admin());
         $q->bindValue(":id", $old->id());
 
         return $q->execute();
@@ -109,7 +116,7 @@ class UserManager
      */
     public function delete(User $user) : bool
     {
-        return ($this->_db->exec("DELETE FROM user WHERE user_login = " . $user->login()) == 1);
+        return ($this->_db->exec("DELETE FROM Utilisateur WHERE login = " . $user->login()) == 1);
     }
 }
 

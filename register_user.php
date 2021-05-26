@@ -62,7 +62,7 @@
         }
 
         $user = new User($data);
-        $user->set_user_rank(0);
+        $user->set_user_admin(0);
         $user_manager = new UserManager($DB);
 
 

@@ -5,11 +5,6 @@
  *
  */
 
-define("RANK_MEMBER", 0);
-define("RANK_MODERATOR", 10);
-define("RANK_ADMIN", 20);
-define("RANK_WEBMASTER", 100);
-
 class User
 {
     private $_id;
@@ -17,7 +12,7 @@ class User
     private $_firstname;
     private $_login;
     private $_passwd;
-    private $_rank;
+    private $_admin; // 0 or 1
 
     public function __construct(array $data)
     {
@@ -109,14 +104,14 @@ class User
     /**
      * @return mixed
      */
-    public function rank()
+    public function admin()
     {
-        return $this->_rank;
+        return $this->_admin;
     }
 
-    public function set_user_rank($rank)
+    public function set_user_admin($admin)
     {
-            $this->_rank = $rank;
+            $this->_admin = $admin;
     }
 }
 ?>
