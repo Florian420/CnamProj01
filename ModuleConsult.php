@@ -3,7 +3,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
-    <title>quiz.io | Accueil</title>
+    <title>quiz.io | Module</title>
     <meta name="Description" content="Test tes connaissances !"/>
     <meta name="Title" content="quiz.io"/>
     <meta name="Author" content="YBE"/>
@@ -24,7 +24,9 @@
     include("header.php");
     include("config.php");
 
-    $q = $DB->prepare("SELECT libelleTheme, idTheme FROM theme");
+    $idTheme = $_GET['id'];
+
+    $q = $DB->prepare("SELECT libelleModule, idModule FROM module WHERE idTheme = $idTheme");
     $q->execute();
 
     echo '<div class="container">';
@@ -34,13 +36,13 @@
     echo '<div class="row">';
     while($row = $q->fetch())
     {
-        $libelleTheme = $row["libelleTheme"];
-        $idTheme = $row["idTheme"];
+        $libelleModule = $row["libelleModule"];
+        $idModule = $row["idModule"];
 
         echo '<div class="col-6" id="col_id">';
-        echo '<a href="ModuleConsult.php?id=' . $idTheme . '" class="list-group-item list-group-item-action flex-column align-items-start" id="a_id">';
+        echo '<a href="quizz.php?id=' . $idModule .'" class="list-group-item list-group-item-action flex-column align-items-start" id="a_id">';
         echo '<div class="d-flex w-100 justify-content-between">';
-        echo '<h5 class="mb-1">' . utf8_encode ( $libelleTheme) . '</h5>';
+        echo '<h5 class="mb-1">' . utf8_encode ( $libelleModule) . '</h5>';
         echo '</div>';
         echo '</a>';
         echo '</div>';
