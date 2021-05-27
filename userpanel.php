@@ -32,7 +32,12 @@
         header("Refresh:2;url=/signin.php", true, 200);
         exit();
     }
-
+    else if (!isset($_GET["dt"]) || !isset($_GET['mid']))
+    {
+        echo "<p style='text-align: center;'>Paramètres invalides ...</p>";
+        header("Refresh:2;url=/userpanel.php", true, 200);
+        exit();
+    }
     /*
      * Profil Info
      *
@@ -83,83 +88,110 @@
      *
      * Passwd update form
      */
-echo '<div class="main">
-<section class="signup">
-<div class="container">
-<div class="signup-content">
+    echo '<div class="main">
+    <section class="signup">
+    <div class="container">
+    <div class="signup-content">
 
-<form method="POST" id="signup-form" class="signup-form" action="">
-    <h3 style="text-align: center;">Changement de mot de passe</h3>
+    <form method="POST" id="signup-form" class="signup-form" action="">
+        <h3 style="text-align: center;">Changement de mot de passe</h3>
 
-<div class="form-group">
-    <input type="password" class="form-input" name="current_password" id="current_password" placeholder="Mot de passe actuel" />
-</div>
+    <div class="form-group">
+        <input type="password" class="form-input" name="current_password" id="current_password" placeholder="Mot de passe actuel" />
+    </div>
 
-<div class="form-group">
-    <input type="password" class="form-input" name="new_password" id="new_password" placeholder="Nouveau mot de passe" />
-</div>
+    <div class="form-group">
+        <input type="password" class="form-input" name="new_password" id="new_password" placeholder="Nouveau mot de passe" />
+    </div>
 
-<div class="form-group">
-    <input type="password" class="form-input" name="re_new_password" id="re_new_password" placeholder="Répétition du nouveau mot de passe" />
-</div>
+    <div class="form-group">
+        <input type="password" class="form-input" name="re_new_password" id="re_new_password" placeholder="Répétition du nouveau mot de passe" />
+    </div>
 
-<div class="form-group">
-    <input type="submit" name="submit_pwd" id="submit_pwd" class="form-submit" value="Changer mon mot de passe" />
-</div>' . $pwd_update_msg . '</form>
+    <div class="form-group">
+        <input type="submit" name="submit_pwd" id="submit_pwd" class="form-submit" value="Changer mon mot de passe" />
+    </div>' . $pwd_update_msg . '</form>
 
-</div>
-</div>
-</section>
-</div>';
+    </div>
+    </div>
+    </section>
+    </div>';
 
     /*
      * Stats summary
      *
      */
-    $q = $DB->prepare("SELECT DISTINCT progress.prog_dt AS dt, module.mod_title AS title, module.mod_id AS mid FROM progress, module WHERE progress.user_id = :uid AND progress.mod_id = module.mod_id ORDER BY progress.prog_dt DESC, module.mod_title LIMIT 20");
-    $q->bindValue(":uid", $_SESSION["id"]);
-    $q->execute();
+    $dt = $_GET["dt"];
+    $mid = $_GET["mid"];
+    $uid = $_SESSION["id"];
 
-    echo '<h3 style="text-align: center;">Résumé limité aux 20 derniers quiz</h3>';
+    $q = $DB->prepare("SELECT question.q_text AS qtxt, progress.prog_result AS pres FROM question, progress WHERE progress.prog_dt = :dt AND progress.user_id = :uid AND progress.mod_id = :mid AND progress.q_id = question.q_id");
 
-    echo '<table class="table table-striped mod-list">';
-    echo '<thead>';
-    echo '<tr>';
-    echo '<th scope="col">Date</th>';
-    echo '<th scope="col">Module</th>';
-    echo '<th scope="col">Score (%)</th>';
-    echo '</tr>';
-    echo '</thead>';
-    echo '<tbody>';
+    $q->bindValue(":dt", $dt);
+    $q->bindValue(":uid", $uid);
+    $q->bindValue(":mid", $mid);
 
-    while($row = $q->fetch())
+    if (!$q->execute() || $q->rowCount() < 1)
     {
-        $dt = $row['dt'];
-        $mod = $row['title'];
-        $mid = $row['mid'];
-
+        echo "<p style='text-align: center;'>Aucunes statistiques à cette date pour ce module...</p>";
+    }
+    else
+    {
         $qscore = $DB->prepare("SELECT COUNT(*) AS score FROM progress WHERE user_id = :uid AND prog_dt = :dt AND mod_id = :mid AND prog_result = :result");
-        $qscore->bindValue(":uid", $_SESSION['id']);
+        $qscore->bindValue(":uid", $uid);
         $qscore->bindValue(":dt", $dt);
         $qscore->bindValue(":mid", $mid);
         $qscore->bindValue(":result", ANS_CORRECT);
         $qscore->execute();
-        $score = (int)$qscore->fetch()['score'];
+        $score = ((int)$qscore->fetch()['score'] / $q->rowCount() * 100);
 
-        $noquestions = $DB->prepare("SELECT COUNT(*) AS noq FROM question WHERE mod_id = :mid");
-        $noquestions->bindValue(":mid", $mid);
-        $noquestions->execute();
-        $noq = (int)$noquestions->fetch()["noq"];
+        $mtitle = $DB->prepare("SELECT mod_title AS title FROM module WHERE mod_id = :mid");
+        $mtitle->bindValue(":mid", $mid);
+        $mtitle->execute();
+        $title = $mtitle->fetch()["title"];
 
+        echo '<h3 style="text-align: center;">Détails: Quiz du <em>' . $dt .'</em> sur le module <em>' . $title . '</em> (' .$score . '% de réussite)</h3>';
+
+        echo '<table class="table table-striped mod-list">';
+        echo '<thead>';
         echo '<tr>';
-        echo '<td><a href="/userstats.php?dt=' . $dt .  '&mid=' . $mid . '">' . $dt . '</td>';
-        echo '<td>' . $mod . '</td>';
-        echo '<td>' . ($score/$noq) * 100 . '%</td>';
+        echo '<th scope="col">#</th>';
+        echo '<th scope="col">Question</th>';
+        echo '<th scope="col">Réponse</th>';
         echo '</tr>';
-    }
+        echo '</thead>';
+        echo '<tbody>';
 
-    echo '</tbody>';
-    echo '</table>';
+        $i = 1;
+        while ($row = $q->fetch())
+        {
+            $qtxt = $row["qtxt"];
+            $pres = $row["pres"];
+
+            switch ($pres) {
+            case ANS_INCORRECT:
+                $pres = "<span style='color: red';>Incorrecte</span>";
+                break;
+            case ANS_CORRECT:
+                $pres = "<span style='color: green';>Correcte</span>";
+                break;
+            case ANS_NONE:
+                $pres = "<span style='color: #555';>Aucune</span>";
+                break;
+            default:
+                $pres = "<span style='color: #555';>????</span>";
+            }
+
+            echo '<tr>';
+            echo '<td>' . $i++ . '</td>';
+            echo '<td>' . $qtxt . '</td>';
+            echo '<td>' . $pres . '</td>';
+            echo '</tr>';
+        }
+
+        echo '</tbody>';
+        echo '</table>';
+    }
 
     include("footer.php");
 ?>
