@@ -3,12 +3,13 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8"/>
-    <title>quiz.io | Panneau de Controle</title>
+    <title>quiz.io | Module</title>
     <meta name="Description" content="Test tes connaissances !"/>
     <meta name="Title" content="quiz.io"/>
     <meta name="Author" content="YBE"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/theme.css"/>
     <link rel="icon" href="quiz.png"/>
 
     <!--[if lt IE 9]>
@@ -22,31 +23,32 @@
 <?php
     include("header.php");
     include("config.php");
-    require "Module.php";
-    require "ModuleManager.php";
 
-    if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] != true)
+    $idTheme = $_GET['id'];
+
+    $q = $DB->prepare("SELECT libelleModule, idModule FROM module WHERE idTheme = $idTheme");
+    $q->execute();
+
+    echo '<div class="container">';
+    echo '<h1 class="center" style="font-size: 35px;">CHOIX DU THEME</h1>';
+    echo '<p class="center"> Sur quel thème voulez-vous vous entrainez ? </p>';
+
+    echo '<div class="row">';
+    while($row = $q->fetch())
     {
-        echo "<p style='text-align: center;'>Vous devez être connecté ...</p>";
-        header("Refresh:2;url=/signin.php", true, 200);
-        exit();
-    }
-    else if (!isset($_SESSION['admin']) || $_SESSION['admin'] != true) // admin: rank >= 10
-    {
-        echo "<p style='text-align: center;'>Vous n'avez pas les privilèges nécéssaires pour cette page ...</p>";
-        header("Refresh:3;url=/index.php", true, 200);
-        exit();
-    }
+        $libelleModule = $row["libelleModule"];
+        $idModule = $row["idModule"];
 
-    $moduleManager = new ModuleManager($DB);
-
-    $modules = $moduleManager->getAllModule();
-   
-
-    echo '<p> mettre à jour les questions des module :</p>';
-    foreach($modules as $module) {
-        echo '<a href=/modifQuestion.php?moduleid='.$module[0].'>'.$module[1].'</a><br>'; 
+        echo '<div class="col-6" id="col_id">';
+        echo '<a href="quizz.php?id=' . $idModule .'" class="list-group-item list-group-item-action flex-column align-items-start" id="a_id">';
+        echo '<div class="d-flex w-100 justify-content-between">';
+        echo '<h5 class="mb-1">' . utf8_encode ( $libelleModule) . '</h5>';
+        echo '</div>';
+        echo '</a>';
+        echo '</div>';
     }
+    echo '</div>';
+    echo '</div>';
 
     
 

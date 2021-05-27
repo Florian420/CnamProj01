@@ -9,6 +9,7 @@
     <meta name="Author" content="YBE"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/theme.css"/>
     <link rel="icon" href="quiz.png"/>
 
     <!--[if lt IE 9]>
@@ -23,24 +24,31 @@
     include("header.php");
     include("config.php");
 
-    $q = $DB->prepare("SELECT mod_title, mod_desc, mod_name FROM module");
+    $q = $DB->prepare("SELECT libelleTheme, idTheme FROM theme");
     $q->execute();
 
-    echo '<div class="list-group mod-list">';
+    echo '<div class="container">';
+    echo '<h1 class="center" style="font-size: 35px;">CHOIX DU THEME</h1>';
+    echo '<p class="center"> Sur quel thème voulez-vous vous entrainez ? </p>';
+
+    echo '<div class="row">';
     while($row = $q->fetch())
     {
-        $mod_title = $row["mod_title"];
-        $mod_desc = $row["mod_desc"];
-        $mod_name = $row["mod_name"];
+        $libelleTheme = $row["libelleTheme"];
+        $idTheme = $row["idTheme"];
 
-        echo '<a href="' . $mod_name . '/" class="list-group-item list-group-item-action flex-column align-items-start">';
+        echo '<div class="col-6" id="col_id">';
+        echo '<a href="ModuleConsult.php?id=' . $idTheme . '" class="list-group-item list-group-item-action flex-column align-items-start" id="a_id">';
         echo '<div class="d-flex w-100 justify-content-between">';
-        echo '<h5 class="mb-1">' . $mod_title . '</h5>';
+        echo '<h5 class="mb-1">' . utf8_encode ( $libelleTheme) . '</h5>';
         echo '</div>';
-        echo '<p class="mb-1">' . $mod_desc . '</p>';
         echo '</a>';
+        echo '</div>';
     }
     echo '</div>';
+    echo '</div>';
+
+    
 
     include("footer.php");
 ?>

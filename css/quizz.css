@@ -1,0 +1,36 @@
+#row_id {
+    border-style: outset;
+    border-radius: 25px;
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 10px 5px 5px black;
+}
+
+span {
+    font-weight: bold;
+}
+
+#title_question, #button {
+    padding-bottom: 25px;
+}
+
+#button {
+    padding-top: 25px;
+}
+
+.btn {
+    background-color: white;
+}
+
+#button, #title, #resultats {
+    text-align: center;
+}
+
+#resultats {
+    border-style: outset;
+    border-radius: 25px;
+    background: white;
+    padding: 20px;
+    box-shadow: 10px 5px 5px black;
+}

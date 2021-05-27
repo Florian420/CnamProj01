@@ -1,0 +1,8 @@
+#a_id {
+    border-style: outset;
+    border-radius: 25px;
+    background: white;
+    padding: 20px;
+    box-shadow: 10px 5px 5px black;
+    margin-bottom: 20px;
+}
