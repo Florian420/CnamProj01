@@ -1,7 +1,7 @@
 USE quizzit;
 
 /*Insert Utilisateur*/
-insert into Utilisateur (nom, prenom, login, mdp, admin) values ('nomAdmin', 'prenomAdmin', 'admin', 'password', TRUE);
+insert into Utilisateur (nom, prenom, login, mdp, admin) values ('nomAdmin', 'prenomAdmin', 'admin', '$2y$10$dZSggI2UleH8NNR1lERdiOKUBav/qXBYBVpLQWpkhX9QvJJ0wusd.', TRUE);
 
 /*Insert Theme*/
 insert into Theme (libelleTheme) values ('Mathématiques');
