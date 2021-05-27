@@ -7,4 +7,5 @@
 
     <p class="center">quizzIT.io - 2021</p>
     <p class="center"><a href="/about.php">About</a></p>
+    <p class="center"><a href="/mentionsLegales.php">Mentions Legales</a></p>
 </footer>
