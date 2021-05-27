@@ -39,7 +39,7 @@
 
     <ul>
         <li>Email: x at protonmail.ch</li>
-        <li>Twitter: <a href="https://twitter.com/x">_</a></li>
+        <li>Twitter: <a href="https://twitter.com/x">x</a></li>
         <li>GitHub: <a href="https://github.com/x">x</a></li>
         <li>GitLab: <a href="https://gitlab.com/x">x</a></li>
     </ul>
